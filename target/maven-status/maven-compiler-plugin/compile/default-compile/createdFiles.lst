@@ -1,0 +1,14 @@
+com\gb\javacrud\App.class
+com\gb\javacrud\controller\UserController.class
+com\gb\javacrud\validation\IUserValidator.class
+com\gb\javacrud\dao\IUserDAO.class
+com\gb\javacrud\service\iUserService.class
+com\gb\javacrud\validation\UserValidator.class
+com\gb\javacrud\notification\iNotification.class
+com\gb\javacrud\dao\UserDAO.class
+com\gb\javacrud\db\DatabaseConfig.class
+com\gb\javacrud\db\IDatabaseConnector.class
+com\gb\javacrud\db\PostgresConnector.class
+com\gb\javacrud\model\User.class
+com\gb\javacrud\notification\Notification.class
+com\gb\javacrud\service\UserService.class

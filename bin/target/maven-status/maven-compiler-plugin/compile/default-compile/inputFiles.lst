@@ -1,0 +1,12 @@
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\App.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\dao\IUserDAO.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\dao\UserDAO.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\db\DatabaseConfig.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\db\IDatabaseConnector.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\db\PostgresConnector.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\model\User.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\notification\iNotification.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\notification\Notification.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\service\iUserService.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\service\UserService.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\javacrud\utils\Utils.java
