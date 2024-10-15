@@ -1,6 +1,6 @@
 # Java CRUD
 ## Descrição
-Este é um projeto desenvolvido com o fim de praticar diversos conceitos de programação em Java. Este projeto serve como uma primeira experiência na implementação de operações CRUD (Create, Read, Update, Delete) e também no uso de várias técnicas e padrões, o que pode torná-lo aparentemente mais complexo do que uma tarefa CRUD simples. Através deste projeto, busquei testar e integrar conhecimentos adquiridos recentemente, e aplicá-los de maneira coesa.
+Este é um projeto desenvolvido com o fim de praticar diversos conceitos de programação em Java. Este projeto serve como uma primeira experiência na implementação de operações CRUD (Create, Read, Update, Delete) e também no uso de várias técnicas e padrões, o que pode torná-lo aparentemente mais complexo do que o necessário. Através deste projeto, busquei testar e integrar conhecimentos adquiridos recentemente, e aplicá-los de maneira coesa.
 
 ## Conceitos e Padrões Utilizados
 - Arquitetura em Camadas (Layered Architecture): Estruturação do projeto em diferentes camadas (Controller, Service, DAO, etc.) para separar responsabilidades.
