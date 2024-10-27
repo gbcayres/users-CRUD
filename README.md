@@ -87,7 +87,7 @@ CREATE TABLE users (
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    createdAt TIMESTAMP WITH TIME ZONE DEFAULT now()
+    createdAt TIMESTAMP NOT NULL
 );
 ```
 ### Configuração do Tomcat
