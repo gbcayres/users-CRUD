@@ -1,14 +1,13 @@
+com\gb\usersCRUD\helpers\InstantAdapter.class
 com\gb\usersCRUD\validation\UserValidator.class
 com\gb\usersCRUD\db\DatabaseConnector.class
-com\gb\usersCRUD\dto\Response.class
 com\gb\usersCRUD\validation\Notification.class
 com\gb\usersCRUD\service\UserService.class
 com\gb\usersCRUD\controller\UserServlet.class
-com\gb\usersCRUD\service\IUserService.class
 com\gb\usersCRUD\controller\UsersServlet.class
 com\gb\usersCRUD\helpers\ResponseWriter.class
 com\gb\usersCRUD\model\User.class
 com\gb\usersCRUD\App.class
-com\gb\usersCRUD\dao\IUserDAO.class
 com\gb\usersCRUD\dao\UserDAO.class
 com\gb\usersCRUD\dto\UserDTO.class
+com\gb\usersCRUD\helpers\ResponseWriter$Response.class

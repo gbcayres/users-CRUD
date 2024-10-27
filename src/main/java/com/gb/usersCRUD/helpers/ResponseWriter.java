@@ -1,6 +1,5 @@
 package com.gb.usersCRUD.helpers;
 
-import com.gb.usersCRUD.dto.Response;
 import com.google.gson.Gson;
 import jakarta.servlet.http.HttpServletResponse;
 
@@ -15,5 +14,8 @@ public class ResponseWriter {
 
         Response<Object> formattedResponse = new Response<>(statusCode, message, data);
         response.getWriter().write(gson.toJson(formattedResponse));
+    }
+
+    private record Response<T>(int status, String message, Object data) {
     }
 }

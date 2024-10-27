@@ -15,6 +15,10 @@ public class Notification {
         return !this.errors.isEmpty();
     }
 
+    public List<String> getErrors() {
+        return errors;
+    }
+
     public String errorMessage() {
         return this.errors.toString();
     }

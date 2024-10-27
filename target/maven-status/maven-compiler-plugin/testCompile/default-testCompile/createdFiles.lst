@@ -1,1 +1,7 @@
 com\gb\usersCRUD\AppTest.class
+com\gb\usersCRUD\UserValidatorTest$ValidateUser.class
+com\gb\usersCRUD\UserValidatorTest.class
+com\gb\usersCRUD\UserValidatorTest$ValidatePassword.class
+com\gb\usersCRUD\UserValidatorTest$validateId.class
+com\gb\usersCRUD\UserValidatorTest$ValidateName.class
+com\gb\usersCRUD\UserValidatorTest$ValidateEmail.class

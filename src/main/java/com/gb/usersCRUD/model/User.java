@@ -1,10 +1,14 @@
 package com.gb.usersCRUD.model;
 
+import java.time.Instant;
+import java.time.LocalDateTime;
+
 public class User {
     private int id;
     private String name;
     private String email;
     private String password;
+    private Instant createdAt;
 
     public User() {
     }
@@ -13,13 +17,15 @@ public class User {
         this.name = name;
         this.email = email;
         this.password = password;
+        this.createdAt = Instant.now();
     }
 
-    public User(int id, String name, String email, String password) {
+    public User(int id, String name, String email, String password, Instant createdAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
+        this.createdAt = createdAt;
     }
 
     public int getId() {
@@ -54,6 +60,14 @@ public class User {
         this.password = password;
     }
 
+    public Instant getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Instant createdAt) {
+        this.createdAt = createdAt;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -61,6 +75,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", createdAt=" + createdAt +
                 '}';
     }
 }

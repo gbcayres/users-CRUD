@@ -7,7 +7,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDAO implements IUserDAO {
+public class UserDAO {
 
     private final DatabaseConnector connector;
 
@@ -15,9 +15,8 @@ public class UserDAO implements IUserDAO {
         this.connector = connector;
     }
 
-    @Override
     public User saveUser(User user) {
-        String query = "INSERT INTO users (name, email, password) VALUES (?, ?, ?) RETURNING *";
+        String query = "INSERT INTO users (name, email, password, createdAt) VALUES (?, ?, ?, ?) RETURNING *";
 
         try(Connection connection = connector.connect();
             PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -25,6 +24,7 @@ public class UserDAO implements IUserDAO {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
+            stmt.setTimestamp(4, Timestamp.from(user.getCreatedAt()));
 
             return executeAndGetUser(stmt);
         } catch (SQLException e) {
@@ -34,7 +34,6 @@ public class UserDAO implements IUserDAO {
        return new User();
     }
 
-    @Override
     public User updateUser(int userId, User user)  {
         String query = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ? RETURNING *";
 
@@ -54,7 +53,6 @@ public class UserDAO implements IUserDAO {
         return new User();
     }
 
-    @Override
     public boolean deleteUser(int userId) {
         String query = "DELETE FROM users WHERE id = ?";
 
@@ -119,7 +117,6 @@ public class UserDAO implements IUserDAO {
         }
     }
 
-    @Override
     public User findById(int userId) {
         String query = "SELECT * FROM users WHERE id = ?";
 
@@ -140,7 +137,6 @@ public class UserDAO implements IUserDAO {
         return new User();
     }
 
-    @Override
     public List<User> selectAllUsers() {
         String query = "SELECT * FROM users ORDER BY id ASC";
         List<User> users = new ArrayList<>();
@@ -164,7 +160,8 @@ public class UserDAO implements IUserDAO {
                 result.getInt("id"),
                 result.getString("name"),
                 result.getString("email"),
-                result.getString("password")
+                result.getString("password"),
+                result.getTimestamp("createdAt").toInstant()
         );
     }
 }

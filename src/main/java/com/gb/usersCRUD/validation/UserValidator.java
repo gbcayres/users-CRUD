@@ -1,37 +1,19 @@
 package com.gb.usersCRUD.validation;
 
-import com.gb.usersCRUD.dao.IUserDAO;
+import com.gb.usersCRUD.dao.UserDAO;
 import com.gb.usersCRUD.model.User;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-
 public class UserValidator {
-    private final IUserDAO userDAO;
+    private final UserDAO userDAO;
 
-    public UserValidator(IUserDAO userDAO) {
+    public UserValidator(UserDAO userDAO) {
         this.userDAO = userDAO;
-    }
-
-    public void validateName(String name, Notification notification) {
-        if (name == null || name.isEmpty()) {
-            notification.addError("name is required.");
-        }
-
-        if (nameIsInvalid(name)) {
-            notification.addError("invalid name.");
-        }
     }
 
     public void validateUser(User user, Notification notification) {
         validateName(user.getName(), notification);
         validateEmail(user.getEmail(), notification);
         validatePassword(user.getPassword(), notification);
-    }
-
-    private boolean nameIsInvalid(String name) {
-        return containsDigit(name) || containsSpecialCharacter(name);
     }
 
     public void validateId(int id, Notification notification) {
@@ -45,8 +27,23 @@ public class UserValidator {
         }
     }
 
+    public void validateName(String name, Notification notification) {
+        if (name == null || name.isBlank()) {
+            notification.addError("name is required.");
+            return;
+        }
+
+        if (nameIsInvalid(name)) {
+            notification.addError("invalid name.");
+        }
+    }
+
+    private boolean nameIsInvalid(String name) {
+        return containsDigit(name) || containsSpecialCharacter(name);
+    }
+
     public void validateEmail(String email, Notification notification) {
-        if (email == null || email.isEmpty()) {
+        if (email == null || email.isBlank()) {
             notification.addError("e-mail is required.");
             return;
         }
@@ -71,19 +68,19 @@ public class UserValidator {
 
     public void validatePassword(String password, Notification notification) {
         if (password.length() < 8) {
-            notification.addError("\npassword must have at least 8 characters.\n");
+            notification.addError("password must have at least 8 characters.");
         }
 
         if (!containsUpperCase(password)) {
-            notification.addError("\npassword must have at least one upper case character.\n");
+            notification.addError("password must have at least one upper case character.");
         }
 
         if (!containsDigit(password)) {
-            notification.addError("\npassword must have at least one digit.\n");
+            notification.addError("password must have at least one digit.");
         }
 
         if (!containsSpecialCharacter(password)) {
-            notification.addError("\npassword must have at least one special character.\n");
+            notification.addError("password must have at least one special character.");
         }
     }
 
@@ -96,6 +93,6 @@ public class UserValidator {
     }
 
     private boolean containsSpecialCharacter(String password) {
-        return password.matches("(?=.*[!@#$%^&*()\\-+]).*");
+        return password.matches(".*[!@#$%^&*()\\-+].*");
     }
 }
