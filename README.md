@@ -48,7 +48,7 @@ curl -X POST http://localhost:8080/UsersCRUD/users \
 -d '{
   "name": "John Doe",
   "email": "john.doe@example.com",
-  "password": "123456"
+  "password": "John@123456"
 }'
 
 ```
