@@ -1,12 +1,14 @@
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\App.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\controller\UserServlet.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\controller\UsersServlet.java
-C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\dao\UserDAO.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\db\DatabaseConnector.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\dto\UserDTO.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\helpers\InstantAdapter.java
-C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\helpers\ResponseWriter.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\helpers\ResponseHandler.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\model\User.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\repository\UserRepository.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\service\UserService.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\validation\Notification.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\validation\UserNotFoundException.java
+C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\validation\UserValidationException.java
 C:\Users\bielz\OneDrive\Desktop\gbDEV\Java\javaCRUD\src\main\java\com\gb\usersCRUD\validation\UserValidator.java

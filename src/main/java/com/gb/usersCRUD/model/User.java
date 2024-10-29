@@ -2,37 +2,33 @@ package com.gb.usersCRUD.model;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
+import java.util.UUID;
 
 public class User {
-    private int id;
+    private UUID id;
     private String name;
     private String email;
     private String password;
     private Instant createdAt;
+    private Instant updatedAt;
 
     public User() {
     }
 
-    public User(String name, String email, String password) {
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.createdAt = Instant.now();
-    }
-
-    public User(int id, String name, String email, String password, Instant createdAt) {
+    public User(UUID id, String name, String email, String password, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
         this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -68,6 +64,14 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public Instant getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Instant updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -76,6 +80,7 @@ public class User {
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }

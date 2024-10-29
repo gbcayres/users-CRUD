@@ -1,12 +1,14 @@
 package com.gb.usersCRUD.controller;
 
-import com.gb.usersCRUD.dao.UserDAO;
+import com.gb.usersCRUD.helpers.ResponseHandler;
+import com.gb.usersCRUD.model.User;
+import com.gb.usersCRUD.repository.UserRepository;
 import com.gb.usersCRUD.db.DatabaseConnector;
 import com.gb.usersCRUD.dto.UserDTO;
 import com.gb.usersCRUD.helpers.InstantAdapter;
-import com.gb.usersCRUD.helpers.ResponseWriter;
-import com.gb.usersCRUD.model.User;
 import com.gb.usersCRUD.service.UserService;
+import com.gb.usersCRUD.validation.UserNotFoundException;
+import com.gb.usersCRUD.validation.UserValidationException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.servlet.ServletException;
@@ -17,8 +19,9 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.Instant;
+import java.util.UUID;
 
-@WebServlet("/users/*")
+@WebServlet("/v1/users/*")
 public class UserServlet extends HttpServlet {
 
     private UserService userService;
@@ -26,8 +29,8 @@ public class UserServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         DatabaseConnector connector = new DatabaseConnector("db.properties");
-        UserDAO userDAO = new UserDAO(connector);
-        userService = new UserService(userDAO);
+        UserRepository userRepository = new UserRepository(connector);
+        userService = new UserService(userRepository);
 
         gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, new InstantAdapter())
@@ -37,79 +40,54 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int userId = getUserIdFromRequestPath(request);
-            UserDTO user = userService.getUserById(userId);
+            UUID userId = getUserIdFromRequestPath(request);
 
-            ResponseWriter.write(response, HttpServletResponse.SC_OK, "User found successfully", user);
-        } catch (IllegalArgumentException e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_BAD_REQUEST,
-                    "ERROR getting user: " + e.getMessage(),
-                    null
-            );
+            User user = userService.getUserById(userId);
+
+            ResponseHandler.ok(response, user);
+        } catch (UserNotFoundException e) {
+            ResponseHandler.notFound(response);
         } catch (Exception e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "ERROR getting user: " + e.getMessage(),
-                    null
-            );
+            ResponseHandler.internalServerError(response, e.getMessage());
         }
     }
 
     @Override
     protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
        try {
-           User newUser = gson.fromJson(request.getReader(), User.class);
+           UUID userId = getUserIdFromRequestPath(request);
 
-           int userId = getUserIdFromRequestPath(request);
-           UserDTO updatedUser = userService.updateUser(userId, newUser);
+           UserDTO newUser = gson.fromJson(request.getReader(), UserDTO.class);
 
-           ResponseWriter.write(response, HttpServletResponse.SC_OK, "User updated successfully", updatedUser);
-       } catch (IllegalArgumentException e) {
-           ResponseWriter.write(
-                   response,
-                   HttpServletResponse.SC_BAD_REQUEST,
-                   "ERROR updating user: " + e.getMessage(),
-                   null
-           );
+           userService.updateUser(userId, newUser);
+
+           ResponseHandler.noContent(response);
+       } catch (UserNotFoundException e) {
+           ResponseHandler.notFound(response);
+       } catch (UserValidationException e) {
+           ResponseHandler.badRequest(response, e.getErrorMessages());
        } catch (Exception e) {
-           ResponseWriter.write(
-                   response,
-                   HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                   "ERROR updating user: " + e.getMessage(),
-                   null
-           );
+           ResponseHandler.internalServerError(response, e.getMessage());
        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            int userId = getUserIdFromRequestPath(request);
-            boolean result = userService.removeUser(userId);
+            UUID userId = getUserIdFromRequestPath(request);
 
-            ResponseWriter.write(response, HttpServletResponse.SC_OK, "User deleted successfully", result);
-        } catch (IllegalArgumentException e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_BAD_REQUEST,
-                    "ERROR deleting user: " + e.getMessage(),
-                    null
-            );
+            userService.removeUser(userId);
+
+            ResponseHandler.noContent(response);
+        } catch (UserNotFoundException e) {
+            ResponseHandler.notFound(response);
         } catch (Exception e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "ERROR deleting user: " + e.getMessage(),
-                    null
-            );
+            ResponseHandler.internalServerError(response, e.getMessage());
         }
     }
 
-    private int getUserIdFromRequestPath(HttpServletRequest request) {
+    private UUID getUserIdFromRequestPath(HttpServletRequest request) {
         String pathInfo = request.getPathInfo();
-        return Integer.parseInt(pathInfo.substring(1));
+        return UUID.fromString(pathInfo.substring(1));
     }
 }

@@ -15,8 +15,8 @@ public class Notification {
         return !this.errors.isEmpty();
     }
 
-    public List<String> getErrors() {
-        return errors;
+    public String[] getErrors() {
+        return errors.toArray(String[]::new);
     }
 
     public String errorMessage() {

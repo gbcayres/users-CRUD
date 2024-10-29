@@ -1,40 +1,29 @@
 package com.gb.usersCRUD.validation;
 
-import com.gb.usersCRUD.dao.UserDAO;
-import com.gb.usersCRUD.model.User;
+import com.gb.usersCRUD.repository.UserRepository;
+import com.gb.usersCRUD.dto.UserDTO;
 
 public class UserValidator {
-    private final UserDAO userDAO;
+    private final UserRepository userRepository;
 
-    public UserValidator(UserDAO userDAO) {
-        this.userDAO = userDAO;
+    public UserValidator(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public void validateUser(User user, Notification notification) {
-        validateName(user.getName(), notification);
-        validateEmail(user.getEmail(), notification);
-        validatePassword(user.getPassword(), notification);
-    }
-
-    public void validateId(int id, Notification notification) {
-        if (id <= 0) {
-            notification.addError("invalid id.");
-            return;
-        }
-
-        if (!this.userDAO.idExists(id)) {
-            notification.addError("user id not found.");
-        }
+    public void validateUser(UserDTO user, Notification notification) {
+        validateName(user.name(), notification);
+        validateEmail(user.email(), notification);
+        validatePassword(user.password(), notification);
     }
 
     public void validateName(String name, Notification notification) {
         if (name == null || name.isBlank()) {
-            notification.addError("name is required.");
+            notification.addError("Name is required.");
             return;
         }
 
         if (nameIsInvalid(name)) {
-            notification.addError("invalid name.");
+            notification.addError("Invalid name.");
         }
     }
 
@@ -43,18 +32,17 @@ public class UserValidator {
     }
 
     public void validateEmail(String email, Notification notification) {
-        if (email == null || email.isBlank()) {
-            notification.addError("e-mail is required.");
+        if (email == null) {
+            notification.addError("E-mail is required.");
             return;
         }
 
-
         if (!emailIsValid(email)) {
-            notification.addError("invalid e-mail format.");
+            notification.addError("Invalid e-mail format.");
         }
 
-        if (emailInUse(email)) {
-            notification.addError("e-mail already in use.");
+        if (userRepository.emailInUse(email)) {
+            notification.addError("E-mail already in use.");
         }
     }
 
@@ -62,25 +50,26 @@ public class UserValidator {
         return email.matches("^[a-zA-Z0-9._'-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
-    private boolean emailInUse(String email) {
-        return userDAO.emailRegistered(email);
-    }
-
     public void validatePassword(String password, Notification notification) {
+        if (password == null) {
+            notification.addError("Password is required.");
+            return;
+        }
+
         if (password.length() < 8) {
-            notification.addError("password must have at least 8 characters.");
+            notification.addError("Password must have at least 8 characters.");
         }
 
         if (!containsUpperCase(password)) {
-            notification.addError("password must have at least one upper case character.");
+            notification.addError("Password must have at least one upper case character.");
         }
 
         if (!containsDigit(password)) {
-            notification.addError("password must have at least one digit.");
+            notification.addError("Password must have at least one digit.");
         }
 
         if (!containsSpecialCharacter(password)) {
-            notification.addError("password must have at least one special character.");
+            notification.addError("Password must have at least one special character.");
         }
     }
 

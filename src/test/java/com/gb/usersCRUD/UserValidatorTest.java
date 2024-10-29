@@ -1,7 +1,7 @@
 package com.gb.usersCRUD;
 
-import com.gb.usersCRUD.dao.UserDAO;
-import com.gb.usersCRUD.model.User;
+import com.gb.usersCRUD.repository.UserRepository;
+import com.gb.usersCRUD.dto.UserDTO;
 import com.gb.usersCRUD.validation.Notification;
 import com.gb.usersCRUD.validation.UserValidator;
 import org.junit.jupiter.api.BeforeEach;
@@ -21,7 +21,7 @@ import static org.mockito.Mockito.when;
 public class UserValidatorTest {
 
     @Mock
-    private UserDAO userDAOmock;
+    private UserRepository userDAOmock;
 
     @InjectMocks
     private UserValidator userValidator;
@@ -34,46 +34,11 @@ public class UserValidatorTest {
     }
 
     @Nested
-    class validateId {
-        @Test
-        @DisplayName("Should not add error when id is valid")
-        public void shouldNotAddErrorWhenIdIsValid() {
-            int validId = 3;
-            when(userDAOmock.idExists(validId)).thenReturn(true);
-
-            userValidator.validateId(validId, notification);
-
-            assertNoErrorsAdded();
-        }
-
-        @Test
-        @DisplayName("Should add error when id do not exists")
-        public void shouldAddErrorWhenIdDoNotExists() {
-            int validId = 3;
-            when(userDAOmock.idExists(validId)).thenReturn(false);
-
-            userValidator.validateId(validId, notification);
-
-            assertAddedOneErrorCorrectly();
-        }
-
-        @Test
-        @DisplayName("Should add error when id is invalid")
-        public void shouldAddErrorWhenIdIsInvalid() {
-            int invalidId = 0;
-
-            userValidator.validateId(invalidId, notification);
-
-            assertAddedOneErrorCorrectly();
-        }
-    }
-
-    @Nested
     class ValidateUser {
         @Test
         @DisplayName("Should not add error when user is valid")
         public void ShouldNotAddErrorIfUserIsValid() {
-            User validUser = new User("Bill", "bill@hotmail.com", "B1ll@Gat3s");
+            var validUser = new UserDTO("Bill", "bill@hotmail.com", "B1ll@Gat3s");
 
             userValidator.validateUser(validUser, notification);
 
@@ -83,7 +48,7 @@ public class UserValidatorTest {
         @Test
         @DisplayName("Should add error when user is invalid")
         public void ShouldAddErrorWhenUserIsInvalid() {
-            User invalidUser = new User("1nvalidN@me", "invalidmail.br", "invalido123");
+            UserDTO invalidUser = new UserDTO("1nvalidN@me", "invalidmail.br", "invalido123");
 
             userValidator.validateUser(invalidUser, notification);
 
@@ -100,7 +65,7 @@ public class UserValidatorTest {
 
             userValidator.validateName(validName,  notification);
 
-            assertNoErrorsAdded();
+            assertFalse(notification.hasErrors());
         }
 
         @Test
@@ -152,7 +117,7 @@ public class UserValidatorTest {
 
             userValidator.validateEmail(validEmail, notification);
 
-            assertNoErrorsAdded();
+            assertFalse(notification.hasErrors());
         }
 
 
@@ -188,7 +153,7 @@ public class UserValidatorTest {
         @DisplayName("Should add error when email is already in use")
         public void shouldAddErrorWhenEmailIsAlreadyInUse() {
             String email = "validEmail@gmail.com";
-            when(userDAOmock.emailRegistered(email)).thenReturn(true);
+            when(userDAOmock.emailInUse(email)).thenReturn(true);
 
             userValidator.validateEmail(email, notification);
 
@@ -205,7 +170,7 @@ public class UserValidatorTest {
 
             userValidator.validatePassword(validPassword, notification);
 
-            assertNoErrorsAdded();
+            assertFalse(notification.hasErrors());
         }
 
 
@@ -252,10 +217,6 @@ public class UserValidatorTest {
 
     private void assertAddedOneErrorCorrectly() {
         assertTrue(notification.hasErrors());
-        assertEquals(1, notification.getErrors().size());
-    }
-
-    private void assertNoErrorsAdded() {
-        assertFalse(notification.hasErrors());
+        assertEquals(1, notification.getErrors().length);
     }
 }

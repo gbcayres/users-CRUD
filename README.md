@@ -1,6 +1,6 @@
 # Users CRUD
 ## Descrição do Projeto
-**Users CRUD** é uma aplicação de gerenciamento de usuários construída em Java, com operações de criação, atualização, remoção e recuperação de usuários. O projeto utiliza servlets para expor uma API RESTful, implementando boas práticas como validação de dados e criptografia de senhas.
+**Users CRUD** é uma aplicação de gerenciamento de usuários construída em Java, com operações de criação, atualização, remoção e recuperação de usuários. O projeto utiliza servlets para expor uma API RESTful, implementando boas práticas como validação de dados, criptografia de senhas e testes unitários.
 
 ## Tecnologias Utilizadas
 - **Java**: Linguagem principal do projeto.
@@ -21,7 +21,7 @@ O projeto segue uma arquitetura em camadas, onde cada camada é responsável por
 - **`User`**: Classe de domínio representando um usuário.
 
 ### 2. Camada de Persistência
-- **`UserDAO`**: Classe que contém a lógica de persistência e métodos para manipular dados no banco de dados.
+- **`UserRepository`**: Classe que contém a lógica de persistência e métodos para manipular dados no banco de dados.
 
 ### 3. Camada de Serviços
 - **`UserService`**: Camada que contém a lógica de negócios, fazendo o intermédio entre a camada de DAO e a de Controllers.
@@ -31,39 +31,51 @@ O projeto segue uma arquitetura em camadas, onde cada camada é responsável por
 ---
 
 ## Endpoints da API
-| Método | Endpoint        | Descrição                       |
-|--------|------------------|---------------------------------|
-| POST   | `/users`        | Cria um novo usuário.          |
-| GET    | `/users`        | Recupera todos os usuários.    |
-| GET    | `/users/{id}`   | Recupera um usuário pelo ID.   |
-| PUT    | `/users/{id}`   | Atualiza um usuário pelo ID.   |
-| DELETE | `/users/{id}`   | Remove um usuário pelo ID.     |
 
-### Exemplo de Uso
+| Método | Endpoint        | Descrição                       | Códigos de Status                                      | Retorno                                           |
+|--------|------------------|---------------------------------|--------------------------------------------------------|---------------------------------------------------|
+| POST   | `/users`        | Cria um novo usuário.          | 201 Created / <br/> 400 Bad Request                         | Cabeçalho de localização / <br/> Mensagem de erro |
+| GET    | `/users`        | Recupera todos os usuários.    | 200 OK                                                 | Lista de usuários salvos                          |
+| GET    | `/users/{id}`   | Recupera um usuário pelo ID.   | 200 OK / <br/> 404 Not Found                           | Detalhes do usuário / <br/> Mensagem de erro      |
+| PUT    | `/users/{id}`   | Atualiza um usuário pelo ID.   | 204 No Content / <br/>  404 Not Found, 400 Bad Request | Body vazio / <br/> Mensagem de erro               |
+| DELETE | `/users/{id}`   | Remove um usuário pelo ID.     | 204 No Content / <br/> 404 Not Found                   | Body vazio / <br/> Mensagem de erro               |
 
-_Requisição_
+### Detalhes dos Códigos de Status e Retornos
+
+- **201 Created**: Retornado após a criação bem-sucedida de um novo usuário.
+- **200 OK**: Indica que a operação foi bem-sucedida e o corpo da resposta contém os dados solicitados.
+- **204 No Content**: Retornado após operação bem-sucedida, sem conteúdo no corpo da resposta.
+- **400 Bad Request**: Indica que a requisição estava malformada devido a erros de validação.
+- **404 Not Found**: Indica que o recurso solicitado (usuário) não foi encontrado.
+
+### Exemplos de Uso
+
+POST 
 ```bash
-curl -X POST http://localhost:8080/UsersCRUD/users \
+curl -X POST http://localhost:8080/UsersCRUD/v1/users \
 -H "Content-Type: application/json" \
 -d '{
   "name": "John Doe",
   "email": "john.doe@example.com",
-  "password": "123456"
+  "password": "123456@John"
 }'
-
 ```
 
-_Resposta_
-```json{
+GET _(by ID)_
+```bash
+curl -X GET localhost:8080/usersCRUD/v1/users/a16ce042-a655-435a-9f10-16ba20d620ff
+-H "Content-Type: application/json"
+```
+
+```json 
+// corpo da resposta
 {
-    "data": {
-        "createdAt": "27/10/2024 17:31",
-        "email": "john.doe@example.com",
-        "id": 6,
-        "name": "John Doe"
-    },
-    "message": "User created successfully",
-    "status": 201
+    "id": "a16ce042-a655-435a-9f10-16ba20d620ff",
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "password": "$2a$10$nOBRFoV/xx/kNy6Z6xidyOBxaRzFQoIM6isCnFcRxXsZCzb7dikG.",
+    "createdAt": "2024-10-29T15:22:52.145111Z",
+    "updatedAt": "2024-10-29T15:22:52.145111Z"
 }
 ```
 ---

@@ -1,4 +1,4 @@
-package com.gb.usersCRUD.dao;
+package com.gb.usersCRUD.repository;
 
 import com.gb.usersCRUD.db.DatabaseConnector;
 import com.gb.usersCRUD.model.User;
@@ -6,17 +6,19 @@ import com.gb.usersCRUD.model.User;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
-public class UserDAO {
+public class UserRepository {
 
     private final DatabaseConnector connector;
 
-    public UserDAO(DatabaseConnector connector) {
+    public UserRepository(DatabaseConnector connector) {
         this.connector = connector;
     }
 
-    public User saveUser(User user) {
-        String query = "INSERT INTO users (name, email, password, createdAt) VALUES (?, ?, ?, ?) RETURNING *";
+    public User save(User user) {
+        String query = "INSERT INTO users (name, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?) RETURNING *";
 
         try(Connection connection = connector.connect();
             PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -25,8 +27,13 @@ public class UserDAO {
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
             stmt.setTimestamp(4, Timestamp.from(user.getCreatedAt()));
+            stmt.setTimestamp(5, Timestamp.from(user.getCreatedAt()));
 
-            return executeAndGetUser(stmt);
+            try (ResultSet result = stmt.executeQuery()) {
+                if (result.next()) {
+                    return mapUserFromResultSet(result);
+                }
+            }
         } catch (SQLException e) {
             System.err.println("error inserting user: " + e.getMessage());
         }
@@ -34,8 +41,8 @@ public class UserDAO {
        return new User();
     }
 
-    public User updateUser(int userId, User user)  {
-        String query = "UPDATE users SET name = ?, email = ?, password = ? WHERE id = ? RETURNING *";
+    public boolean update(UUID userId, User user)  {
+        String query = "UPDATE users SET name = ?, email = ?, password = ?, updatedAt = ? WHERE id = ?";
 
         try (Connection connection = connector.connect();
              PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -43,25 +50,28 @@ public class UserDAO {
             stmt.setString(1, user.getName());
             stmt.setString(2, user.getEmail());
             stmt.setString(3, user.getPassword());
-            stmt.setInt(4, userId);
+            stmt.setTimestamp(4, Timestamp.from(user.getUpdatedAt()));
+            stmt.setObject(5, userId);
 
-            return executeAndGetUser(stmt);
+            int rowsAffected = stmt.executeUpdate();
+
+            return rowsAffected == 1;
         } catch (SQLException e) {
             System.err.println("error updating user: " + e.getMessage());
         }
 
-        return new User();
+        return false;
     }
 
-    public boolean deleteUser(int userId) {
+    public boolean delete(UUID userId) {
         String query = "DELETE FROM users WHERE id = ?";
 
         try (Connection connection = connector.connect();
             PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            stmt.setInt(1, userId);
+            stmt.setObject(1, userId);
 
-             int rowsAffected = stmt.executeUpdate();
+            int rowsAffected = stmt.executeUpdate();
 
             return rowsAffected == 1;
         } catch (SQLException e) {
@@ -71,18 +81,9 @@ public class UserDAO {
         return false;
     }
 
-    private User executeAndGetUser(PreparedStatement stmt) throws SQLException {
-        try (ResultSet result = stmt.executeQuery()) {
-            if (result.next()) {
-                return mapUserFromResultSet(result);
-            }
-        }
-
-        return new User();
-    }
-
-    public boolean emailRegistered(String email) {
+    public boolean emailInUse(String email) {
         String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+
         try (Connection connection = connector.connect();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
@@ -96,12 +97,13 @@ public class UserDAO {
         return false;
     }
 
-    public boolean idExists(int id) {
+    public boolean idExists(UUID id) {
         String query = "SELECT COUNT(*) FROM users WHERE id = ?";
+
         try (Connection connection = connector.connect();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            stmt.setInt(1, id);
+            stmt.setObject(1, id);
 
             return executeAndCheckRecord(stmt);
         } catch (SQLException e) {
@@ -117,28 +119,29 @@ public class UserDAO {
         }
     }
 
-    public User findById(int userId) {
+    public Optional<User> findById(UUID userId) {
         String query = "SELECT * FROM users WHERE id = ?";
 
         try (Connection connection = connector.connect();
              PreparedStatement stmt = connection.prepareStatement(query)) {
 
-            stmt.setInt(1, userId);
+            stmt.setObject(1, userId);
 
             try (ResultSet result = stmt.executeQuery()) {
                 if (result.next()) {
-                    return mapUserFromResultSet(result);
+                    return Optional.of(mapUserFromResultSet(result));
                 }
             }
         } catch (SQLException e) {
             System.err.println("error searching user: " + e.getMessage());
         }
 
-        return new User();
+        return Optional.empty();
     }
 
-    public List<User> selectAllUsers() {
+    public List<User> findAll() {
         String query = "SELECT * FROM users ORDER BY id ASC";
+
         List<User> users = new ArrayList<>();
 
         try(Connection connection = connector.connect();
@@ -157,11 +160,12 @@ public class UserDAO {
 
     private User mapUserFromResultSet(ResultSet result) throws SQLException {
         return new User(
-                result.getInt("id"),
+            result.getObject("id", UUID.class),
                 result.getString("name"),
                 result.getString("email"),
                 result.getString("password"),
-                result.getTimestamp("createdAt").toInstant()
+                result.getTimestamp("createdAt").toInstant(),
+                result.getTimestamp("updatedAt").toInstant()
         );
     }
 }

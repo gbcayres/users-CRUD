@@ -1,12 +1,13 @@
 package com.gb.usersCRUD.controller;
 
-import com.gb.usersCRUD.dao.UserDAO;
+import com.gb.usersCRUD.helpers.ResponseHandler;
+import com.gb.usersCRUD.repository.UserRepository;
 import com.gb.usersCRUD.db.DatabaseConnector;
 import com.gb.usersCRUD.dto.UserDTO;
 import com.gb.usersCRUD.helpers.InstantAdapter;
-import com.gb.usersCRUD.helpers.ResponseWriter;
 import com.gb.usersCRUD.model.User;
 import com.gb.usersCRUD.service.UserService;
+import com.gb.usersCRUD.validation.UserValidationException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jakarta.servlet.ServletException;
@@ -16,10 +17,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
+import java.net.URI;
 import java.time.Instant;
 import java.util.List;
+import java.util.UUID;
 
-@WebServlet("/users")
+@WebServlet("/v1/users")
 public class UsersServlet extends HttpServlet {
     private UserService userService;
     private Gson gson;
@@ -27,8 +30,8 @@ public class UsersServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
         DatabaseConnector connector = new DatabaseConnector("db.properties");
-        UserDAO userDAO = new UserDAO(connector);
-        userService = new UserService(userDAO);
+        UserRepository userRepository = new UserRepository(connector);
+        userService = new UserService(userRepository);
 
         gson = new GsonBuilder()
                 .registerTypeAdapter(Instant.class, new InstantAdapter())
@@ -36,42 +39,31 @@ public class UsersServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            List<UserDTO> users = userService.getAllUsers();
-            ResponseWriter.write(response, HttpServletResponse.SC_OK, "Users found successfully", users);
+            UserDTO newUser = gson.fromJson(request.getReader(), UserDTO.class);
+
+            UUID userId = userService.createUser(newUser);
+
+            String location = String.format("%s/users/%s", request.getRequestURL().toString(), userId.toString());
+
+            ResponseHandler.created(response, URI.create(location));
+        } catch (UserValidationException e) {
+            ResponseHandler.badRequest(response, e.getErrorMessages());
         } catch (Exception e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "ERROR getting users:\n" + e.getMessage(),
-                    null
-            );
+            ResponseHandler.internalServerError(response, e.getMessage());
         }
     }
 
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            User newUser = gson.fromJson(request.getReader(), User.class);
-            System.out.println(newUser);
-            UserDTO savedUser = userService.createUser(newUser.getName(), newUser.getEmail(), newUser.getPassword());
+            List<User> users = userService.listUsers();
 
-            ResponseWriter.write(response, HttpServletResponse.SC_CREATED, "User created successfully", savedUser);
-        } catch (IllegalArgumentException e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_BAD_REQUEST,
-                    "ERROR creating user: " + e.getMessage(),
-                    null
-            );
+            ResponseHandler.ok(response, users);
         } catch (Exception e) {
-            ResponseWriter.write(
-                    response,
-                    HttpServletResponse.SC_INTERNAL_SERVER_ERROR,
-                    "ERROR creating user: " + e.getMessage(),
-                    null
-            );
+            ResponseHandler.internalServerError(response, e.getMessage());
         }
     }
+
 }
