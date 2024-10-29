@@ -103,12 +103,12 @@ CREATE TABLE users (
 );
 ```
 ### Configuração do Tomcat
-* Instale o Apache Tomcat
-* Configure o ambiente Java: Certifique-se de que o Java está instalado e que a variável de ambiente ```JAVA_HOME``` aponta para o diretório de instalação do Java.
+* **Instale o Apache Tomcat**
+* **Configure o ambiente Java**: Certifique-se de que o Java está instalado e que a variável de ambiente ```JAVA_HOME``` aponta para o diretório de instalação do Java.
 
 ### Deploy Local no Tomcat
-* Gerar arquivo ```.war```: No diretório do projeto, execute o comando ```mvn clean package``` para gerar o arquivo ```.war```.
-* Deploy do ```.war```: Copie o arquivo gerado (target/UsersCRUDAPI.war) para o diretório **webapps** do Tomcat.
-* Inicie o Tomcat: Navegue até o diretório **bin** do Tomcat e execute ```startup.sh``` (Linux/macOS) ou ```startup.bat``` (Windows).
+* **Gerar arquivo ```.war```**: No diretório do projeto, execute o comando ```mvn clean package``` para gerar o arquivo ```.war```.
+* **Deploy do ```.war```**: Copie o arquivo gerado (target/UsersCRUDAPI.war) para o diretório **webapps** do Tomcat.
+* **Inicie o Tomcat**: Navegue até o diretório **bin** do Tomcat e execute ```startup.sh``` (Linux/macOS) ou ```startup.bat``` (Windows).
 
 ---
