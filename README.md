@@ -24,7 +24,7 @@ O projeto segue uma arquitetura em camadas, onde cada camada é responsável por
 - **`UserRepository`**: Classe que contém a lógica de persistência e métodos para manipular dados no banco de dados.
 
 ### 3. Camada de Serviços
-- **`UserService`**: Camada que contém a lógica de negócios, fazendo o intermédio entre a camada de DAO e a de Controllers.
+- **`UserService`**: Camada que contém a lógica de negócios, fazendo o intermédio entre a camada de Persistência e a de Controladores.
 
 ### 4. Camada de Controladores
 - **`UsersServlet` e `UserServlet`**: Lidam com as requisições HTTP e interagem com a camada de serviços.
