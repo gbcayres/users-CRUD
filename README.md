@@ -67,8 +67,7 @@ curl -X GET localhost:8080/usersCRUD/v1/users/a16ce042-a655-435a-9f10-16ba20d620
 -H "Content-Type: application/json"
 ```
 
-```json 
-// corpo da resposta
+```json
 {
     "id": "a16ce042-a655-435a-9f10-16ba20d620ff",
     "name": "John Doe",
@@ -95,11 +94,12 @@ db.password=sua_senha
 * Criar uma tabela ```users``` com a seguinte estrutura:
 ```SQL
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(255) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
-    createdAt TIMESTAMP NOT NULL
+    createdAt TIMESTAMP NOT NULL,
+    updatedAt TIMESTAMP NOT NULL
 );
 ```
 ### Configuração do Tomcat
