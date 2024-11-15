@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="8d0011cf-f2da-4fc1-a3d3-e368bc680bc8" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/gb/usersCRUD/UserRepositoryTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/java/com/gb/usersCRUD/UserServiceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/gb/usersCRUD/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/gb/usersCRUD/UserDAOTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/model/User.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/model/User.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/repository/UserRepository.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/service/UserService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/gb/usersCRUD/service/UserService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.AppTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.AppTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateEmail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateEmail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateName.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateName.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidatePassword.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidatePassword.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateUser.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest$ValidateUser.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/surefire-reports/TEST-com.gb.usersCRUD.UserValidatorTest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/test-classes/com/gb/usersCRUD/UserDAOTest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/usersCRUD.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/usersCRUD.war" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/usersCRUD/WEB-INF/classes/com/gb/usersCRUD/repository/UserRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/usersCRUD/WEB-INF/classes/com/gb/usersCRUD/repository/UserRepository.class" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Record" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2mb4iMFKy7J4HsKm0wWtSQdz5a0" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.App.executor": "Run",
+    "Application.UserController.executor": "Run",
+    "Application.UserDAO.executor": "Run",
+    "Application.UserService.executor": "Run",
+    "Application.UserServlet.executor": "Run",
+    "Application.UserValidator.executor": "Run",
+    "JUnit.UserRepositoryTest.executor": "Coverage",
+    "JUnit.UserServiceTest.executor": "Run",
+    "JUnit.UserValidatorTest$ValidateEmail.shouldAddErrorIfEmailFormatIsInvalid.executor": "Run",
+    "JUnit.UserValidatorTest.executor": "Run",
+    "JUnit.com.gb.usersCRUD.repository in usersCRUD.executor": "Coverage",
+    "JUnit.java in usersCRUD.executor": "Run",
+    "Maven.usersCRUD [clean,package].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last.edited.regexp": "",
+    "project.structure.last.edited": "Libraries",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RunManager" selected="JUnit.UserServiceTest">
+    <configuration name="UserRepositoryTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usersCRUD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gb.usersCRUD.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gb.usersCRUD" />
+      <option name="MAIN_CLASS_NAME" value="com.gb.usersCRUD.UserRepositoryTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usersCRUD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gb.usersCRUD.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gb.usersCRUD" />
+      <option name="MAIN_CLASS_NAME" value="com.gb.usersCRUD.UserServiceTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserValidatorTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usersCRUD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gb.usersCRUD.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gb.usersCRUD" />
+      <option name="MAIN_CLASS_NAME" value="com.gb.usersCRUD.UserValidatorTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="com.gb.usersCRUD.repository in usersCRUD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usersCRUD" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.gb.usersCRUD.repository.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="com.gb.usersCRUD.repository" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="java in usersCRUD" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="usersCRUD" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="javaCRUD" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="javaCRUD" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.UserServiceTest" />
+        <item itemvalue="JUnit.UserRepositoryTest" />
+        <item itemvalue="JUnit.com.gb.usersCRUD.repository in usersCRUD" />
+        <item itemvalue="JUnit.java in usersCRUD" />
+        <item itemvalue="JUnit.UserValidatorTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="8d0011cf-f2da-4fc1-a3d3-e368bc680bc8" name="Changes" comment="" />
+      <created>1727332069262</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1727332069262</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/javaCRUD$UserServiceTest.ic" NAME="UserServiceTest Coverage Results" MODIFIED="1731173916086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gb.usersCRUD.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/javaCRUD$UserValidatorTest.ic" NAME="UserValidatorTest Coverage Results" MODIFIED="1730222977631" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gb.usersCRUD.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/javaCRUD$java_in_usersCRUD.ic" NAME="java in usersCRUD Coverage Results" MODIFIED="1730574734860" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/javaCRUD$UserRepositoryTest.ic" NAME="UserRepositoryTest Coverage Results" MODIFIED="1731104057473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.gb.usersCRUD.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/UserServlet_java$java_in_usersCRUD.ic" NAME="java in usersCRUD Coverage Results" MODIFIED="1730059173596" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+  </component>
+</project>

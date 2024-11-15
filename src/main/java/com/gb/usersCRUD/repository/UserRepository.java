@@ -17,8 +17,8 @@ public class UserRepository {
         this.connector = connector;
     }
 
-    public User save(User user) {
-        String query = "INSERT INTO users (name, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?) RETURNING *";
+    public UUID save(User user) {
+        String query = "INSERT INTO users (name, email, password, createdAt, updatedAt) VALUES (?, ?, ?, ?, ?) RETURNING id";
 
         try(Connection connection = connector.connect();
             PreparedStatement stmt = connection.prepareStatement(query)) {
@@ -31,14 +31,14 @@ public class UserRepository {
 
             try (ResultSet result = stmt.executeQuery()) {
                 if (result.next()) {
-                    return mapUserFromResultSet(result);
+                    return result.getObject("id", UUID.class);
                 }
             }
         } catch (SQLException e) {
-            System.err.println("error inserting user: " + e.getMessage());
+            throw new RuntimeException("error inserting user: " + e.getMessage());
         }
 
-       return new User();
+        return null;
     }
 
     public boolean update(UUID userId, User user)  {
@@ -57,10 +57,8 @@ public class UserRepository {
 
             return rowsAffected == 1;
         } catch (SQLException e) {
-            System.err.println("error updating user: " + e.getMessage());
+            throw new RuntimeException("error updating user: " + e.getMessage());
         }
-
-        return false;
     }
 
     public boolean delete(UUID userId) {
@@ -75,10 +73,8 @@ public class UserRepository {
 
             return rowsAffected == 1;
         } catch (SQLException e) {
-            System.err.println("error deleting user: " + e.getMessage());
+            throw new RuntimeException("error deleting user: " + e.getMessage());
         }
-
-        return false;
     }
 
     public boolean emailInUse(String email) {
@@ -91,10 +87,8 @@ public class UserRepository {
 
             return executeAndCheckRecord(stmt);
         } catch (SQLException e) {
-            System.err.println("error finding user by email: " + e.getMessage());
+            throw new RuntimeException("error verifying email: " + e.getMessage());
         }
-
-        return false;
     }
 
     public boolean idExists(UUID id) {
@@ -107,15 +101,13 @@ public class UserRepository {
 
             return executeAndCheckRecord(stmt);
         } catch (SQLException e) {
-            System.err.println("error finding user by id: " + e.getMessage());
+            throw new RuntimeException("error finding user by id: " + e.getMessage());
         }
-
-        return false;
     }
 
     private boolean executeAndCheckRecord(PreparedStatement stmt) throws SQLException {
         try (ResultSet result = stmt.executeQuery()) {
-            return result.next() && result.getInt(1) > 0;
+            return result.next() && result.getInt("count") > 0;
         }
     }
 
@@ -133,7 +125,7 @@ public class UserRepository {
                 }
             }
         } catch (SQLException e) {
-            System.err.println("error searching user: " + e.getMessage());
+            throw new RuntimeException("error searching user: " + e.getMessage());
         }
 
         return Optional.empty();
@@ -152,12 +144,11 @@ public class UserRepository {
                 users.add(mapUserFromResultSet(result));
             }
         } catch (SQLException e) {
-            System.err.println("error inserting user: " + e.getMessage());
+            throw new RuntimeException("error inserting user: " + e.getMessage());
         }
 
         return users;
     }
-
     private User mapUserFromResultSet(ResultSet result) throws SQLException {
         return new User(
             result.getObject("id", UUID.class),

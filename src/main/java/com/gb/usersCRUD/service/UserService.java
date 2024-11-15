@@ -42,9 +42,7 @@ public class UserService {
         String passwordHash = hashPassword(user.getPassword());
         user.setPassword(passwordHash);
 
-        User savedUser = userRepository.save(user);
-
-        return savedUser.getId();
+        return userRepository.save(user);
     }
 
     public String hashPassword(String password) {
