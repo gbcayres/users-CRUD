@@ -70,8 +70,8 @@ public class UserRepositoryTest {
             UUID savedUserId = userRepository.save(testUser);
 
             // assert
-            assertEquals(savedUserId, testUser.getId()); // assume que você tenha equals implementado no User
-            verify(preparedStatement, times(1)).executeQuery(); // agora verifica o método correto
+            assertEquals(savedUserId, testUser.getId());
+            verify(preparedStatement, times(1)).executeQuery();
         }
 
         @Test
